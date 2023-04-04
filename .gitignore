@@ -1,0 +1,7 @@
+devops/.terraform*
+.terraform*
+terraform*
+terrafrom.tfstate
+devops/terraform.tfstate
+devops/terraform.tfstate.backup
+
