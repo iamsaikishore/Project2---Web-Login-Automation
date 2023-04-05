@@ -8,7 +8,7 @@ pipeline {
         
         stage('Check out the repo') {
             steps {
-                git 'https://github.com/arjundas1494/web_login_automation.git'
+                git 'https://github.com/iamsaikishore/Project2---Web-Login-Automation.git'
             }
         }
         
