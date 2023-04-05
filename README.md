@@ -77,7 +77,6 @@ $ aws configure
 ```
 Give the ACCESS_KEY, SECRET_ACCESS_KEY, REGION and FORMAT.
 
-### Project Begins
 Now create a directory and clone the git repository
 ```shell
 $ mkdir project_web && cd project_web
@@ -93,6 +92,11 @@ Now check the Dockerfile where we have taken the base image as ubuntu:latest and
 Now go to devops/ directory and check the terraform configuration file ```cd devops/```. Go through each terraform configuration file to know how the resources will provisioned. 
 
 ![Screenshot (161)](https://user-images.githubusercontent.com/129657174/229815184-ac4458be-ee8e-47b6-9f05-d40e9281fe34.png)
+
+#### In this tutorial i explained two methods to deploy the application, first method is using Github Actions as CICD and second using Jenkins as CICD  
+
+## Method: 1
+Using GitHub Actions
 
 Now check the Github Actions workflow yaml file which is equivalent to jenkins pipeline
 
@@ -193,6 +197,38 @@ Now ```Actions``` --> ```CI``` --> ```Initial Updates``` --> ```build```
 Now copy the loadbalancer dns ``kishq-load-balancer-572781093.***.elb.amazonaws.com`` and replace '***' with the AWS Region ``kishq-load-balancer-572781093.ap-south-1.elb.amazonaws.com`` and search in the browser.
 
 ![Screenshot (181)](https://user-images.githubusercontent.com/129657174/229864058-d80a9959-fdd0-43cf-b0eb-19546a8dbc4f.png)
+
+### Hurrayyyyyyyyy! We have deployed the application successfully.
+
+
+## Method: 2
+Using Jenkins
+
+Check the Jenkinsfile which is the declarative pipeline script.
+
+Now go to GitHub and create a repository.
+
+Now push the code to your GitHub repository.
+```shell
+$ git init
+$ git add .
+$ git commit -m "your_commit_message"
+$ git add remote origin <your_githubrepo_url>
+$ git push origin master
+```
+
+### To configure AWS credentials in Jenkins:
+
+* On the Jenkins dashboard, go to ```Manage Jenkins``` > ```Manage Plugins``` in the ``Available`` tab. Search for the `Pipeline: AWS Steps' plugin and choose Install without restart.
+* Navigate to ``Manage Jenkins`` > ``Manage Credentials`` > ``(global)`` > ``Global Credentials`` > `Add Credentials`
+* Select Kind as AWS credentials and use the ID sam-jenkins-demo-credentials.
+* Enter the access key ID and secret access key and choose OK.
+
+Now create a pipeline job, copy the jenkins pipeline script, don't forget to make the necessary changes(ex: ECR_REPO_NAME, Git Repo link, AWS Credentials ID)
+
+![Screenshot (185)](https://user-images.githubusercontent.com/129657174/230014843-b628406f-bbe3-4bf0-bcc8-914c5a08fd6c.png)
+
+Now build the job by clicking ``Build Now`` and go to the Console Output copy the loadbalancer ip and search in the browser, you can access the application.
 
 ### Hurrayyyyyyyyy! We have deployed the application successfully.
 
