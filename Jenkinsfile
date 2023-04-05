@@ -18,7 +18,6 @@ pipeline {
                     sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $ECR_REPO_NAME'
                     sh 'docker build -t nodeapp .'
                     sh 'docker tag nodeapp:latest $ECR_REPO_NAME/nodeapp:${RELEASE_VERSION}'
-//                    sh 'docker build -t $ECR_REPO_NAME/nodeapp:${RELEASE_VERSION} .'
                     sh 'docker push $ECR_REPO_NAME/nodeapp:${RELEASE_VERSION}'
                 }
             }
